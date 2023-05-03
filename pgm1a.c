@@ -1,50 +1,63 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<time.h>
+#include<stdlib.h>
 
-#define MAX_SIZE 100
-
-int array[MAX_SIZE];
-int n = 0;
-
-void remove_element(int i) {
-    if (i < 0 || i >= n) {
-        printf("Invalid index\n");
-        return;
-    }
-    for (int j = i; j < n - 1; j++) {
-        array[j] = array[j+1];
-    }
-    n--;
+int next(int a[],int n,int t)
+{	
+	int i,larg;
+	for(i=0;i<n-1;i++)
+	{
+		if(a[i]>t)
+		{
+			larg=a[i];
+			break;
+		}
+	}
+	for(i=0;i<n-1;i++)
+	{
+		if(a[i]>t && larg>a[i])
+			larg=a[i];
+	}
+	return larg;
 }
 
-int next_element(int i) {
-    int j = i + 1;
-    while (j < n && array[j] <= array[i]) {
-        j++;
+int main()
+{
+	int n,i,p,l,j;
+	int *a;
+	double total_t;
+	printf("Enter number of elements :");
+	scanf("%d",&n);
+	a = (int*)malloc(sizeof(int)*n);
+    srand( (unsigned) time(NULL) * getpid());
+    if(a != NULL)
+    {
+        for(j =0;j<n; j++)
+            a[j] = rand()%100;
     }
-    if (j >= n) {
-        return -1;
-    }
-    return array[j];
+    
+    //Deletion
+	printf("Enter which position element to remove: ");
+	scanf("%d",&p);
+	printf("Deleted element is %d\n",a[p-1]);
+	clock_t t;
+	t=clock();
+	j=a[p-1];
+	for(i=p-1;i<n-1;i++)
+		a[i]=a[i+1];
+	t=clock()-t;
+	total_t=(((double)t)/CLOCKS_PER_SEC);
+	printf("%f to delete\n\n",total_t);
+	
+	//Next largest
+	t=clock();
+	l=next(a,n,j);
+	t=clock()-t;
+	total_t=(((double)t)/CLOCKS_PER_SEC);
+	printf("The next largest element is %d\n",l);
+	printf("%f to find next largest\n",total_t);
+	return 0;
 }
 
-int main() {
-    // example usage
-    n = 5;
-    array[0] = 5;
-    array[1] = 3;
-    array[2] = 8;
-    array[3] = 1;
-    array[4] = 4;
 
-    remove_element(2); // remove element at index 2 (value 8)
-    printf("After removing element at index 2: ");
-    for (int i = 0; i < n; i++) {
-        printf("%d ", array[i]);
-    }
-    printf("\n");
 
-    int next_largest = next_element(1); // find next largest element after index 1 (value 4)
-    printf("Next largest element after index 1: %d\n", next_largest);
-
-    return 0;
-}
