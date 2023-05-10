@@ -13,8 +13,8 @@ gnuplot> set logscale
 
 gnuplot> set title "Bubble Sort Vs Quick Sort"
 
-gnuplot> set xlabel "Size(n)"
+gnuplot> set xlabel "Size(n) -->"
 
-gnuplot> set ylabel "log[Time(s)]"
+gnuplot> set ylabel "log[Time(s)] -->"
 
 gnuplot>replot
