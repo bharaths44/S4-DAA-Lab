@@ -6,7 +6,11 @@ values of n, the number of elements in the list to be sorted and plot a graph of
 taken versus n. The elements can be generated using the random number generator.
 
 GNU plot commands used :
+
 gnuplot> plot "sort.dat" using 1:2 title 'Bubble' with points smooth csplines, "sort.dat" using 1:3 title 'Quick' with points smooth csplines
+
 gnuplot> set title "Bubble Sort Vs Quick Sort"
+
 gnuplot> set xlabel "Size(n)"
+
 gnuplot> set ylabel" log[Time(s)]"
