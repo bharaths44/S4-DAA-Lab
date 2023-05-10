@@ -9,6 +9,8 @@ GNU plot commands used :
 
 gnuplot> plot "sort.dat" using 1:2 title 'Bubble' with points smooth csplines, "sort.dat" using 1:3 title 'Quick' with points smooth csplines
 
+gnuplot> set logscale
+
 gnuplot> set title "Bubble Sort Vs Quick Sort"
 
 gnuplot> set xlabel "Size(n)"
