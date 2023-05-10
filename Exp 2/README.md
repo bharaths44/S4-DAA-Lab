@@ -7,7 +7,7 @@ taken versus n. The elements can be generated using the random number generator.
 
 GNU plot commands used :
 
-gnuplot> plot "sort.dat" using 1:2 title 'Bubble' with points smooth csplines, "sort.dat" using 1:3 title 'Quick' with points smooth csplines
+gnuplot> plot "sort.dat" using 1:2 title 'Bubble' with linespoints smooth bezier, "sort.dat" using 1:3 title 'Quick' with linespoints smooth bezier
 
 gnuplot> set logscale
 
