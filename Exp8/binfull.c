@@ -1,98 +1,80 @@
 #include <stdio.h>
-#include <math.h>
 
-int binPackingNextFit(int weights[], int capacity, int n) {
-    int bins = 0;
-    int remainingCapacity = capacity;
-    for (int i = 0; i < n; i++) 
-    {
-        if (weights[i] > remainingCapacity) 
-        {
-            remainingCapacity = capacity - weights[i];
+// Function to implement First Fit algorithm for bin packing
+int firstFit(int weights[], int n, int capacity) {
+    int bins = 0; 
+    int bin_capacity = capacity;
+    
+    for (int i = 0; i < n; i++) {
+        if (weights[i] <= bin_capacity) {
+            bin_capacity -= weights[i];
+        } else {
             bins++;
-        } 
-        else 
-        {
-            remainingCapacity -= weights[i];
-        }
-    }
-    return bins + 1; // Add one more bin for any remaining items
-}
-
-int binPackingFirstFit(int weights[], int capacity, int n) {
-    int bins = 0;
-    int remainingCapacity[100] = {0};
-    for (int i = 0; i < n; i++) 
-    {
-        int j=0;
-        for (j = 0; j < bins; j++) 
-        {
-            if (weights[i] <= remainingCapacity[j]) 
-            {
-                remainingCapacity[j] -= weights[i];
-                break;
-            }
-        }
-        if (j == bins) 
-        {
-            remainingCapacity[bins] = capacity - weights[i];
-            bins++;
+            bin_capacity = capacity - weights[i];
         }
     }
     return bins;
 }
 
-int binPackingBestFit(int weights[], int capacity, int n) {
-    int bins = 0;
-    int remainingCapacity[100] = {0};
-    for (int i = 0; i < n; i++) 
-    {
-        int minimum = capacity + 1;
-        int index = 0;
-        for (int j = 0; j < bins; j++) 
-        {
-            if (weights[i] <= remainingCapacity[j] && remainingCapacity[j] - weights[i] < minimum) 
-            {
-                index = j;
-                minimum = remainingCapacity[j] - weights[i];
-            }
-        }
-        if (minimum == capacity + 1) 
-        {
-            remainingCapacity[bins] = capacity - weights[i];
+// Function to implement Next Fit algorithm for bin packing
+int nextFit(int weights[], int n, int capacity) {
+    int bins = 1; // Start with one bin
+    int bin_capacity = capacity;
+    
+    for (int i = 0; i < n; i++) {
+        if (weights[i] <= bin_capacity) {
+            bin_capacity -= weights[i];
+        } else {
             bins++;
-        } 
-        else 
-        {
-            remainingCapacity[index] -= weights[i];
+            bin_capacity = capacity - weights[i];
         }
     }
     return bins;
-}  
+}
 
+// Function to implement Best Fit algorithm for bin packing
+int bestFit(int weights[], int n, int capacity) {
+    int bins = 0;
+    int bin_remaining_capacity[n];
+    
+    for (int i = 0; i < n; i++) {
+        int j;
+        int min_remaining_capacity = capacity + 1;
+        int best_bin = -1;
+        
+        for (j = 0; j < bins; j++) {
+            if (bin_remaining_capacity[j] >= weights[i] && bin_remaining_capacity[j] - weights[i] < min_remaining_capacity) {
+                best_bin = j;
+                min_remaining_capacity = bin_remaining_capacity[j] - weights[i];
+            }
+        }
+        
+        if (best_bin == -1) {
+            bin_remaining_capacity[bins] = capacity - weights[i];
+            bins++;
+        } else {
+            bin_remaining_capacity[best_bin] -= weights[i];
+        }
+    }
+    return bins;
+}
 
 int main() {
-    int n, capacity;
-    printf("BIN PACKING PROBLEM USING NEXT, FIRST AND BEST FIT\n\n");
-    printf("Enter the number of items: ");
-    scanf("%d", &n);
-    int weights[100];
-    float totalWeight = 0;
-    for (int i = 0; i < n; i++) {
-        printf("Enter the item %d: ", i + 1);
-        scanf("%d", &weights[i]);
-        totalWeight += weights[i];
-    }
-    printf("\nEnter the maximum capacity of bin: ");
-    scanf("%d", &capacity);
-    int lowerBound = ceil(totalWeight / (float)capacity);
-    printf("\nLower Bound(Min number of bins required): %d\n", lowerBound);
-    printf("The total number of bins required using:\n");
-    printf("Next Fit: %d\n", binPackingNextFit(weights, capacity, n));
-    printf("First Fit: %d\n", binPackingFirstFit(weights, capacity, n));
-    printf("Best Fit: %d\n", binPackingBestFit(weights, capacity, n));
+    int weights[] = {5, 7, 5, 2, 4, 2, 5, 1, 6};
+    int n = sizeof(weights) / sizeof(weights[0]);
+    int bin_capacity = 10;
+
+    int bins_first_fit = firstFit(weights, n, bin_capacity);
+    int bins_next_fit = nextFit(weights, n, bin_capacity);
+    int bins_best_fit = bestFit(weights, n, bin_capacity);
+
+    printf("Number of bins required (Next Fit): %d\n", bins_next_fit);
+    printf("Number of bins required (First Fit): %d\n", bins_first_fit);
+    printf("Number of bins required (Best Fit): %d\n", bins_best_fit);
+
     return 0;
 }
+
  
 //TEST CASES
 // {5, 7, 5, 2, 4, 2, 5, 1, 6}; 6 5 5
