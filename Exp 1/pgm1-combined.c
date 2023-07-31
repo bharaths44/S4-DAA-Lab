@@ -90,7 +90,6 @@ int main() {
 	scanf("%d", &n);
 
 	stack = (int*)malloc(sizeof(int) * n);
-	srand((unsigned)time(NULL) * getpid());
 
 	// Populate stack and linked list with random elements
 	for (i = 0; i < n; i++) {
