@@ -7,7 +7,7 @@
 
 // number of vertices in graph
 
-int main() {
+void main() {
   int V;
   printf("Enter number of edges :");
   scanf("%d",&V);
@@ -18,23 +18,13 @@ int main() {
   			scanf("%d",&G[i][j]);
   }
   	
-  int no_edge;  // number of edge
-
-  // create a array to track selected vertex
-  // selected will become true otherwise false
   int selected[V];
 
   // set selected false initially
-  memset(selected, false, sizeof(selected));
-  
-  // set number of edge to 0
-  no_edge = 0;
-
-  // the number of egde in minimum spanning tree will be
-  // always less than (V -1), where V is number of vertices in
-  //graph
-
-  // choose 0th vertex and make it true
+for(int i=0;i<V;i++)
+{
+  selected[i]=false;
+}
   selected[0] = true;
 
   int x,y,total_cost=0;  //  row number , col number
@@ -43,7 +33,7 @@ int main() {
   // print for edge and weight
   printf("Edge : Weight\n");
 
-  while (no_edge < V - 1) {
+  for (int no_edge=0;no_edge < V - 1;no_edge++) {
     //For every vertex in the set S, find the all adjacent vertices
     // , calculate the distance from the vertex selected at step 1.
     // if the vertex is already in the set S, discard it otherwise
@@ -69,9 +59,7 @@ int main() {
     total_cost+=G[x][y];
     printf("%c - %c : %d\n", a+x, b+y, G[x][y]);
     selected[y] = true;
-    no_edge++;
   }
   printf("Total Cost : %d\n",total_cost);
 
-  return 0;
 }
