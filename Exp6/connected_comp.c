@@ -5,7 +5,8 @@
 
 int graph[MAX_VERTICES][MAX_VERTICES] = {0}; // Adjacency matrix to represent the graph
 bool visited[MAX_VERTICES] = {false}; // Array to keep track of visited vertices
-int stack[MAX_VERTICES]; // Stack to store the topologically sorted vertices
+
+
 void dfs(int v, int vertices) {
 
     printf("%d ", v+1);  
