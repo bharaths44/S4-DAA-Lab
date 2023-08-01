@@ -32,12 +32,12 @@ void main()
 			{
 		        printf("%d ",(k+1));
 		        flag [k]=1;
-		    }
+		    
 
-		    for(i=0;i<n;i++)
-		    {
-		    	if(a[i][k]==1)
-				   indeg[k]--;
+    		    for(i=0;i<n;i++)
+    		    
+    		    	if(a[k][i]==1)
+    				   indeg[i]--;
 			}
 		}
 		count++;
