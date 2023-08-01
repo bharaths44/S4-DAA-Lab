@@ -22,7 +22,7 @@ void dfs(int v, int vertices) {
     }
 }
 
-void topologicalSort(int vertices) {
+void connected_comp(int vertices) {
     // Perform DFS on all unvisited vertices
     for (int i = 0; i < vertices; i++) {
         if (!visited[i]) {
@@ -47,7 +47,7 @@ int main() {
         }
     }
 
-    topologicalSort(vertices);
+    connected_comp(vertices);
 
     return 0;
 }
