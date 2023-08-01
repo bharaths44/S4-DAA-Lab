@@ -1,7 +1,6 @@
 // Prim's Algorithm in C
 
 #include<stdio.h>
-#include<stdbool.h> 
 #include<string.h>
 #define INF 9999999
 
@@ -23,9 +22,9 @@ void main() {
   // set selected false initially
 for(int i=0;i<V;i++)
 {
-  selected[i]=false;
+  selected[i]=0;
 }
-  selected[0] = true;
+  selected[0] = 1;
 
   int x,y,total_cost=0;  //  row number , col number
   char a=65;
@@ -58,7 +57,7 @@ for(int i=0;i<V;i++)
     }
     total_cost+=G[x][y];
     printf("%c - %c : %d\n", a+x, b+y, G[x][y]);
-    selected[y] = true;
+    selected[y] = 1;
   }
   printf("Total Cost : %d\n",total_cost);
 
