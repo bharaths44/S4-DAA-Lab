@@ -7,6 +7,7 @@ taken versus n. The elements can be generated using the random number generator.
 
 GNU plot commands used :
 
+```shell
 gnuplot> plot "sort.dat" using 1:2 title 'Bubble' with linespoints smooth bezier, "sort.dat" using 1:3 title 'Quick' with linespoints smooth bezier
 
 gnuplot> set logscale
@@ -17,4 +18,6 @@ gnuplot> set xlabel "Size(n) -->"
 
 gnuplot> set ylabel "log[Time(s)] -->"
 
-gnuplot>replot
+gnuplot> replot
+
+```
